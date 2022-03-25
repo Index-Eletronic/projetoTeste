@@ -1,7 +1,8 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 def hello(resquest):
-    return HttpResponse('Michele')
+    return render(resquest, 'index.html')
 
 def articles(resquest, year):
     return HttpResponse ('O ano passado enviado foi: ' + str(year))
@@ -20,5 +21,7 @@ def lerDoBanco(nome):
 
 def fnome(request, nome):
     result = lerDoBanco(nome)
-    print(result)
-    return HttpResponse('A pessoa foi encontrada, ela tem: ' + str(result['idade']) + ' anos')
+    if result['idade'] > 0:
+        return HttpResponse('A pessoa foi encontrada, ela tem: ' + str(result['idade']) + ' anos')
+    else:
+        return HttpResponse('Pessoa não encontrada')
