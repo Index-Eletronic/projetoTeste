@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from.views import hello, articles,fnome
+from.views import hello, articles, fname2
+from django.conf import settings
+from django.conf.urls.static import static
 
 '''def hello(resquest):
     return HttpResponse('Filipe')'''
@@ -23,6 +25,6 @@ from.views import hello, articles,fnome
 urlpatterns = [
     path('hello/', hello),
     path('articles/<int:year>', articles),
-    path('pessoa/<str:nome>', fnome),
+    path('pessoa/<str:nome>', fname2),
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

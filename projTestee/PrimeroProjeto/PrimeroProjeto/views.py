@@ -13,11 +13,13 @@ def lerDoBanco(nome):
         {'nome': 'Pedro', 'idade': 25},
         {'nome': 'Joaquim', 'idade': 27}
     ]
+
     for pessoa in lista_nomes:
         if pessoa['nome'] == nome:
             return pessoa
-        else:
-            return {'nome': 'NÃO ENCONTADO', 'idade': 0}
+    else:
+        return {'nome': 'NÃO ENCONTADO', 'idade': 0}
+
 
 def fnome(request, nome):
     result = lerDoBanco(nome)
@@ -25,3 +27,7 @@ def fnome(request, nome):
         return HttpResponse('A pessoa foi encontrada, ela tem: ' + str(result['idade']) + ' anos')
     else:
         return HttpResponse('Pessoa não encontrada')
+
+def fname2(request, nome):
+    idade = lerDoBanco(nome)['idade']
+    return render(request, 'pessoa.html', {'v_idade': idade})
